@@ -2,19 +2,47 @@
     la funcion de emergencia teniendo el ingreso con la forma prompt, si no, se bloquea el acceso
     Si ingresa los datos correctos sale del bucle */
 
+const array = [];
+function Registrarte(){
+    class User{
+        constructor(nombre, password){
+          this.nombre = nombre;
+          this.password = password;
+        }
+      }
+      
+    let nombre = prompt("ingrese el nombre de usuario");
+    let passwords = parseInt(prompt("ingrese el password"));
+    let obj = new User(nombre, passwords);
+
+    if(nombre=="") {
+        alert("ingrese un usuario");
+    }
+    else if (passwords ==parseInt("")){
+        alert("ingrese una contraseña");
+    } 
+    else{
+        array.push(obj);
+    }
+console.log(array);
+
+}
+
 cont=0;
 function Login(){ 
-    var mensaje = [];
-    var usuario=document.login.usuario.value; 
-    var password=document.login.password.value; 
-    let user1 = "Augusto";
-    let pass1 = 2345;
-    let useradmin = "admin";
-    let passadmin = 1234;
+    let mensaje = [];
 
-    if(cont<3){
-        if (usuario==useradmin || usuario==user1){ 
-            if(password==pass1 || password==passadmin){ 
+    let usuario=document.login.user.value; 
+    let password=document.login.pass.value;
+
+    let nom = array.find(name => name.nombre===usuario);
+
+      if(cont<3){
+
+        if (nom.nombre==usuario && usuario !=""){ 
+ 
+            if(nom.password==password && password!=''){ 
+
                 alert(`Felicidades ${usuario}, usted sera redirigido` );
                 window.location.href ="https://media.istockphoto.com/vectors/congratulations-greeting-card-vector-lettering-vector-id1199025903"; 
                 cont = 0;
@@ -40,9 +68,9 @@ function Login(){
         alert(`Tiene 2 posibilidades mas, no se equivoque!!!`); 
         for(i=0; i<2; i++){
             let usuario2 = prompt(`Ingresa el nombre de usuario`);
-            if(usuario2==useradmin || usuario2==user1){
+            if(nom.nombre==usuario2 && usuario2 !=""){
                 let pass3 = parseInt(prompt("Ingresa la contraseña"));
-                if(pass3==pass1 || pass3==passadmin){
+                if(nom.password==pass3 && pass3!=''){
                     alert(`Felicidades ${usuario2}, usted sera redirigido`);
                     window.location.href ="https://media.istockphoto.com/vectors/congratulations-greeting-card-vector-lettering-vector-id1199025903";
                     break;
@@ -54,6 +82,7 @@ function Login(){
         if (i>1){alert(`Usuario bloqueado`);} 
     }
 }
+
 
 var text = ["Bienvenido a nuestra pagina", 
             "Inserte el Usuario y Contraseña correctas", 
