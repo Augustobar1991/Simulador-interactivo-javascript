@@ -12,13 +12,13 @@ function Registrarte(){
       }
       
     let nombre = prompt("ingrese el nombre de usuario");
-    let passwords = parseInt(prompt("ingrese el password"));
+    let passwords = prompt("ingrese el password");
     let obj = new User(nombre, passwords);
 
     if(nombre=="") {
         alert("ingrese un usuario");
     }
-    else if (passwords ==parseInt("")){
+    else if (passwords ==""){
         alert("ingrese una contraseña");
     } 
     else{
@@ -34,6 +34,7 @@ function Login(){
 
     let usuario=document.login.user.value; 
     let password=document.login.pass.value;
+    try {
 
     let nom = array.find(name => name.nombre===usuario);
 
@@ -60,16 +61,18 @@ function Login(){
             {mensaje.push("El campo Usuario no puede estar vacio\n");}
         if (password == "") 
             {mensaje.push("El campo Clave no puede estar vacio");}
-            
+        else{
+            alert("Usuario y contraseña no registrado");
+        }
         if (mensaje.length > 0)
-        {alert(mensaje.join("\n"));} 
+        {alert(mensaje.join("\n"));}
     } 
     else if(cont=3){
         alert(`Tiene 2 posibilidades mas, no se equivoque!!!`); 
         for(i=0; i<2; i++){
             let usuario2 = prompt(`Ingresa el nombre de usuario`);
             if(nom.nombre==usuario2 && usuario2 !=""){
-                let pass3 = parseInt(prompt("Ingresa la contraseña"));
+                let pass3 = prompt("Ingresa la contraseña");
                 if(nom.password==pass3 && pass3!=''){
                     alert(`Felicidades ${usuario2}, usted sera redirigido`);
                     window.location.href ="https://media.istockphoto.com/vectors/congratulations-greeting-card-vector-lettering-vector-id1199025903";
@@ -81,6 +84,15 @@ function Login(){
         }
         if (i>1){alert(`Usuario bloqueado`);} 
     }
+    } 
+    catch(err) {
+        if (usuario == "") 
+            {mensaje.push("El campo Usuario no puede estar vacio\n");}
+        if (password == "") 
+            {mensaje.push("El campo Clave no puede estar vacio");}
+        if (mensaje.length > 0)
+        {alert(mensaje.join("\n"));} 
+  }
 }
 
 
@@ -96,5 +108,27 @@ function cambiarText() {
     contar++;
     if (contar >= text.length) {
       contar = 0;
+    }
+}
+
+function BuscaUsuario(){
+    let admin = prompt(`Ingresa el nombre de usuario de administrador`);
+    let contraseña = prompt(`Ingresa la contraseña de administrador`);
+    if (admin==="admin" && contraseña==1234)
+    {
+        let usuario1 = prompt("Ingrese el usuario a encontrar");
+        let nom = array.find(name => name.nombre===usuario1);
+        try {
+            if (nom.nombre==usuario1){
+                alert("El usuario existe y tiene como contraseña: " + nom.password);
+            }
+            else{
+                alert("El usuario no existe");
+            }
+        } 
+        catch(err) {alert("no se encontro nombre");}
+    }
+    else{
+        alert("No eres administrador");
     }
 }
