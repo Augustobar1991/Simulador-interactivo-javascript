@@ -3,14 +3,14 @@
     Si ingresa los datos correctos sale del bucle */
 
 const array = [];
+class User{
+constructor(nombre, password){
+    this.nombre = nombre;
+    this.password = password;
+    }
+}
 function Registrarte(){
-    class User{
-        constructor(nombre, password){
-          this.nombre = nombre;
-          this.password = password;
-        }
-      }
-      
+
     let nombre = prompt("ingrese el nombre de usuario");
     let passwords = prompt("ingrese el password");
     let obj = new User(nombre, passwords);
@@ -25,7 +25,6 @@ function Registrarte(){
         array.push(obj);
     }
 console.log(array);
-
 }
 
 cont=0;
@@ -95,22 +94,6 @@ function Login(){
   }
 }
 
-
-var text = ["Bienvenido a nuestra pagina", 
-            "Inserte el Usuario y Contraseña correctas", 
-            "Recuerde, si inserta mal, sera Bloqueado"]; 
-var contar = 0;
-var elem = document.getElementById("cambioDeTexto");
-var inst = setInterval(cambiarText, 3000);
-
-function cambiarText() {
-    elem.innerHTML = text[contar];
-    contar++;
-    if (contar >= text.length) {
-      contar = 0;
-    }
-}
-
 function BuscaUsuario(){
     let admin = prompt(`Ingresa el nombre de usuario de administrador`);
     let contraseña = prompt(`Ingresa la contraseña de administrador`);
@@ -132,3 +115,33 @@ function BuscaUsuario(){
         alert("No eres administrador");
     }
 }
+
+let botonEnter = document.getElementById("Entrar");
+botonEnter.addEventListener("click",Login);
+
+let botonRegistrarte = document.getElementById("Registrarte");
+botonRegistrarte.addEventListener("click",Registrarte);
+
+let botonBuscaUsuario = document.getElementById("BuscaUsuario");
+botonBuscaUsuario.addEventListener("click",BuscaUsuario);
+
+var text = ["Bienvenido a nuestra pagina", 
+            "Inserte el Usuario y Contraseña correctas", 
+            "Recuerde, si inserta mal, sera Bloqueado"]; 
+var contar = 0;
+var elem = document.getElementById("cambioDeTexto");
+var inst = setInterval(cambiarText, 3000);
+
+function cambiarText() {
+    elem.innerHTML = text[contar];
+    contar++;
+    if (contar >= text.length) {
+      contar = 0;
+    }
+}
+
+document.addEventListener("click", function(event) {
+    if (event.code === 'Enter') {
+        Login();
+    }
+});
